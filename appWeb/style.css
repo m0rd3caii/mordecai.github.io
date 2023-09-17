@@ -1,0 +1,218 @@
+body {
+    zoom: 1.5;
+    cursor: url('/src/images/avatar.PNG'), auto;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #36393f;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+    
+}
+
+.profile {
+    background-color:#232428; /* Fondo del perfil */
+    width: 300px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgb(0, 0, 0);
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    padding-top: 10px;
+}
+
+
+.avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.user-info {
+    text-align: left;
+}
+
+.user-info h1 {
+    font-size: 15px;
+    margin: 0;
+}
+
+.user-info p {
+    font-size: 10px;
+    margin: 0;
+}
+
+.content {
+    background-color: #111214; /* Fondo semi-transparente */
+    margin-left: 11px;
+    margin-right: 11px;
+    margin-bottom: 11px;
+    padding: 10px 10px; /* Padding a los lados */
+    border-radius: 8px 8px 8px 8px; /* Bordes redondeados en la parte inferior */
+    text-align: left;
+}
+
+.about-me h2, .status h2, .activity h2 {
+    font-size: 10px;
+    margin: 1;
+    margin-top: 20px; 
+}
+
+.about-me p, .status p, .activity p {
+    font-size: 10px;
+    margin: 0;
+    color:#DBDEE1;
+}
+
+.buttons button {
+    display: block;
+    margin: 10px auto;
+    background-color: #7289da;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    background-color: #677bc4;
+}
+
+/* CSS para el encabezado con la imagen de fondo */
+.prueba{
+    height: 0.1px;
+}
+
+.separator {
+    height: 0.002px; 
+    border-color : #333; 
+    background-color:  #333;
+    margin: 10px 0; 
+}
+
+
+.text-box {
+    background-color: transparent; 
+    padding: 4px 4px; 
+    background-color: transparent; 
+    border: none; /* Sin borde */
+    font-size: 8px;
+    color: #fff; 
+    width: 200px; 
+}
+
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #111214;
+    overflow: hidden;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, #7289da 20px, #7289da 40px);
+    background-size: 100% 40px;
+    animation: wave 4s linear infinite;
+}
+
+@keyframes wave {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.profile {
+    transform: scale(0.95);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Agregamos la transición para box-shadow */
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); /* Inicialmente, no hay sombra */
+}
+
+.profile:hover {
+    transform: scale(1); /* Mantenemos la velocidad original de agrandamiento */
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5); /* Agregamos un resplandor blanco */
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Estilos para el contenedor de iconos */
+.icon-container {
+    background-color: #111113; /* Color de fondo */
+    border-radius: 4px; /* Borde curvo */
+    padding:3px 7px 3px 5px; /* Espacio interno */
+    margin: 12px 10px 10px auto; /* Margen superior e inferior con auto para centrar horizontalmente */
+    text-align: center; /* Alinea el contenido al centro */
+    max-width: 12px; /* Establece un ancho máximo para evitar que se extienda demasiado */
+}
+
+
+.icon-container img{
+    display: block;
+}
+
+.profile-image{
+    border: 5px solid #232428;
+    border-radius: 50%;
+}
+
+.avatar {
+    position: relative; /* Habilita la posición relativa para que los elementos internos respeten su posición */
+    display: inline-block; /* Hace que el contenedor del avatar tenga el tamaño del contenido */
+}
+
+.connected-indicator {
+    position: absolute; /* Habilita la posición absoluta para superponer el indicador en el avatar */
+    top: 0; /* Alinea el indicador en la parte superior del avatar */
+    right: 0; /* Alinea el indicador en la parte derecha del avatar */
+    width: 15px; 
+    height: 15px;
+    margin: 57px 20px 10px auto;
+    background-color: #23A55A;
+    border-radius: 50%;
+    border: 5px solid #232428;
+    z-index: 1;
+}
+
+
+.discord-icon {
+    background-image: url('/src/images/discord-logo-icons-editorial-collection-free-vector.jpg'); /* Ruta de la imagen de Discord */
+    background-size: 14px 14px; /* Tamaño de la imagen */
+    margin-bottom: 4px;
+    width: 12px; /* Ancho de la imagen */
+    height: 12px; /* Altura de la imagen */
+    display: inline-block;
+    margin-right: 5px; /* Espacio entre la imagen y el texto */
+    vertical-align: middle; /* Alinea verticalmente la imagen con el texto */
+}
+
+.bot-label {
+    background-color: #5460E6; /* Fondo azul */
+    color: #fff; /* Letras blancas */
+    margin: -1px 14px 0px 4px;
+    position: absolute;
+    padding: 2px 4px; /* Espaciado interno */
+    padding-top: 3px;
+    border-radius: 2px; /* Borde curvo */
+    font-size: 6px;
+}
