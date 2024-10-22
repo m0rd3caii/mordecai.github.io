@@ -7,7 +7,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
-    overflow: auto; 
+    overflow: hidden; 
     
 }
 
@@ -17,7 +17,7 @@ body {
     margin: 20px auto;
     border-radius: 8px;
     box-shadow: 0px 0px 15px rgb(0, 0, 0);
-    overflow: visible;
+    overflow: hidden;
 }
 
 .header {
@@ -27,74 +27,7 @@ body {
     padding-top: 10px;
 }
 
-/* Ajustes para el contenedor de la política */
-.policy-container {
-    height: 300px; /* Altura reducida para mejor visualización */
-    overflow-y: auto;
-    padding: 20px;
-    border: 1px solid #333;
-    border-radius: 5px;
-    background-color: #111214;
-    margin: 10px 0;
-    
-    /* Estilos para la barra de desplazamiento */
-    scrollbar-width: thin;
-    scrollbar-color: #666 #111214;
-}
-/* Estilos para la barra de desplazamiento en Chrome */
-.policy-container::-webkit-scrollbar {
-    width: 8px;
-}
 
-.policy-container::-webkit-scrollbar-track {
-    background: #111214;
-}
-
-.policy-container::-webkit-scrollbar-thumb {
-    background-color: #666;
-    border-radius: 4px;
-}
-
-/* Ajustes de contenido dentro del policy-container */
-.policy-container .about-me {
-    margin-bottom: 15px;
-    padding-right: 10px;
-}
-
-.policy-container h2 {
-    font-size: 12px;
-    margin-bottom: 8px;
-    color: #fff;
-}
-
-.policy-container p {
-    font-size: 10px;
-    line-height: 1.4;
-    color: #DBDEE1;
-    margin-bottom: 10px;
-}
-
-/* Ajuste del contenido principal */
-.content {
-    background-color: #111214;
-    margin: 11px;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: left;
-    max-height: none; /* Eliminamos la restricción de altura máxima */
-}
-
-/* Ajustes para el texto del encabezado */
-.user-info h1 {
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.user-info p {
-    font-size: 10px;
-    margin-bottom: 10px;
-    color: #DBDEE1;
-}
 .avatar img {
     width: 85px;
     height: 80px;
