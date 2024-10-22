@@ -21,10 +21,10 @@ body {
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    padding-top: 10px;
+    position: relative;
+    margin-top: -30px; /* Ajuste negativo para subir el avatar */
+    padding-left: 16px;
+    z-index: 2;
 }
 
 
@@ -87,8 +87,12 @@ body {
 }
 
 /* CSS para el encabezado con la imagen de fondo */
-.prueba{
-    height: 0.1px;
+.prueba {
+    height: 60px;
+    position: relative;
+    overflow: visible; /* Cambiado a visible para permitir que el avatar se sobreponga */
+    width: 100%;
+    border-radius: 8px 8px 0 0;
 }
 
 .separator {
