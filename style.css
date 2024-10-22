@@ -181,10 +181,10 @@ a {
 }
 
 .avatar img {
-    width: 85px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    margin-right: 20px; /* Este margen se aplica al lado derecho del avatar */
+    margin-right: 10px; /* Este margen se aplica al lado derecho del avatar */
 }
 
 .connected-indicator {
