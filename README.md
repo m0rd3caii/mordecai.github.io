@@ -1,5 +1,5 @@
-# mordecai.github.io
-MORDECAI
+# MORDECAI
+
 
 -- Collect Cards
 
